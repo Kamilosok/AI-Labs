@@ -1,2 +1,5 @@
 # Ignore markdownlint config
 .markdownlint.json
+
+# Editor
+.vscode
