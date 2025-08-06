@@ -48,8 +48,6 @@ Write to `zad1_output.txt`
     In my debug mode I print the whole chessboard.
 </details>
 
----
-
 ## Exercise 2: Text Reconstruction by Max-Square Segmentation
 
 In this task you will reconstruct a text with no spaces by inserting spaces so that:
@@ -125,13 +123,13 @@ Your goal is to find the **minimum number of bit flips** required so that the fi
 
 ### Input E4
 
-Read from `zad4_input.txt`.
+Read from `zad4_input.txt`
 
 One line that contains: `bits`: a string of `0` and `1` characters of some length **N** and `D`: an integer (0 ≤ `D` ≤ **N**), the desired block length, separated by a space.
 
 ### Output E4
 
-Write to `zad4_output.txt`.
+Write to `zad4_output.txt`
 
 Output a single integer `m`, so that `m` is the minimum number of bit flips from the input sequence so that a sequence of bits that satisfies the exercise conditions can be achieved.
 
@@ -166,13 +164,13 @@ Implement a simplified nonogram solver using the following heuristic *(inspired 
 
 ### Input E5
 
-Read from `zad5_input.txt`.
+Read from `zad5_input.txt`
 
-The first line contains two integers **X** and **Y** where **X** is the number of rows and **Y** is the number of columns, the next **X** lines contain descriptions of rows, which consist of at least **one non-zero** number that smaller than the amount of lines of the opposite axis. They are followed by **Y** descriptions of columns which follow the same rules.
+The first line contains two integers **X** and **Y** where **X** is the number of rows and **Y** is the number of columns, the next **X** lines contain descriptions of rows, which consist of exactly **one non-zero** number that smaller than the amount of lines of the opposite axis. They are followed by **Y** descriptions of columns which follow the same rules.
 
 ### Output E5
 
-Write to `zad5_output.txt`.
+Write to `zad5_output.txt`
 
 Exactly **X** lines, each with **Y** characters so that the image fulfills the nonogram:
 
@@ -184,4 +182,4 @@ Exactly **X** lines, each with **Y** characters so that the image fulfills the n
 ---
 
 > **Source:**
-> This list of problems was assigned as part of the **Artificial Intelligence* (SI) course in the 2025 Summer semester at the University of Wrocław by Paweł Rychlikowski
+> This list of problems was assigned as part of the *Artificial Intelligence* (SI) course in the 2025 Summer semester at the University of Wrocław by Paweł Rychlikowski

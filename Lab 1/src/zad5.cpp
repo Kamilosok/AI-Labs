@@ -364,6 +364,7 @@ int main(int argc, char *argv[])
     std::uniform_int_distribution<int> rowDist(0, rows.size() - 1);
     std::uniform_int_distribution<int> colDist(0, cols.size() - 1);
 
+    // While not all rows or all columns are correct
     while (!cool)
     {
         // Randomly choosing row or column
@@ -409,6 +410,7 @@ int main(int argc, char *argv[])
 
         counter += 1;
 
+        // Reshuffle every some steps
         if (counter % 30000001 == 0)
         {
             printf("Reshuffling board...\n");
