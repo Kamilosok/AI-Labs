@@ -16,8 +16,8 @@ Write to `zad1_output.txt`
 
 Exactly **X** lines, each with **Y** characters so that the image fulfills the nonogram:
 
-- `.` for an empty cell  
-- `#` for a filled (black) cell
+- `.` for an empty *(white)* cell  
+- `#` for a filled *(black)* cell
 
 > **Note:** There may be multiple valid solutions.
 
@@ -30,11 +30,11 @@ Exactly **X** lines, each with **Y** characters so that the image fulfills the n
 
 You control a commando dropped at night into a **rectangular** maze of some size. Each cell of the maze is one of:
 
-1. `#` — a wall (impassable)
-2. `G` — a goal square
-3. `S` — a possible starting square; the commando may begin on any one of these, but you don’t know which
-4. `B` — both a start and a goal (counts as either role)  
-5. ` ` — an ordinary empty square
+1. `#` - a wall (impassable)
+2. `G` - a goal square
+3. `S` - a possible starting square; the commando may begin on any one of these, but you don’t know which
+4. `B` - both a start and a goal (counts as either role)  
+5. ` ` - an ordinary empty square
 
 On each turn you issue a move: **U**, **D**, **L**, or **R**.  Moving into a wall does nothing (the commando stays put).  You must produce a single **sequence of at most 150 moves** that **guarantees** your commando ends on some goal cell, **no matter** which start square he actually began on.
 
