@@ -83,7 +83,7 @@ The agent should choose moves as follows:
 
 Write an agent that consistently defeats the agent from **Exercise 3**.
 
-Unlike the random playout–based strategy, this agent must rely on a **heuristic evaluation function** to assess moves or board positions. The heuristic can use any reasonable factors you design *(e.g., material balance, positional features, control of traps, proximity to the opponent’s den, etc.)*. The agent may run up to 4x slower than the **Exercise 3** agent.
+Unlike the random playout-based strategy, this agent must rely on a **heuristic evaluation function** to assess moves or board positions. The heuristic can use any reasonable factors you design *(e.g., material balance, positional features, control of traps, proximity to the opponent’s den, etc.)*. The agent may run up to 4x slower than the **Exercise 3** agent.
 
 ## Exercise 5: Jungle Implementation
 
