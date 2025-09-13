@@ -5,6 +5,7 @@
 #include <random>
 #include <chrono>
 
+// Base class for all agents
 class JungleAgent : public JungleBase
 {
 protected:
@@ -21,9 +22,9 @@ public:
     const bool &getPlaysUp();
     void setPlaysUp(const bool &p);
     virtual void agentMove() = 0;
+    // For Q-learning
     virtual bool loadWeights([[__maybe_unused__]] const std::string &filename)
     {
-        // domyślnie nie-QL, nic nie robimy
         return false;
     }
     virtual bool saveWeights([[__maybe_unused__]] const std::string &filename) const

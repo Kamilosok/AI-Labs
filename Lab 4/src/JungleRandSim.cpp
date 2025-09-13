@@ -16,6 +16,7 @@ JungleRandSim::~JungleRandSim()
     nextStatesMoves.clear();
 }
 
+// Generate next states to ultimatelt choose the best one with Monte-Carlo method
 void JungleRandSim::genNextStates()
 {
     // currState.upMove = playsUp;
@@ -38,6 +39,7 @@ void JungleRandSim::genNextStates()
     }
 }
 
+// The agent chooses the next move as described in Lab 4 Exercise 3
 void JungleRandSim::agentMove()
 {
     genNextStates();
@@ -48,12 +50,10 @@ void JungleRandSim::agentMove()
 
     for (uint32_t stateId = 0; stateId < nextStates.size(); stateId++)
     {
-        // fprintf(stderr, "IN\n");
         double currScore = 0;
         for (uint32_t i = 0; i < simsPerMove; i++)
         {
             state_t nextState = nextStates[stateId];
-            // printf("%u\n", i);
             for (uint32_t mov = 0; mov < movesPerTry; mov++)
             {
                 std::vector<Move> possMoves;
@@ -75,7 +75,6 @@ void JungleRandSim::agentMove()
                     currScore -= 1;
                     break;
                 }
-                // Add stalemate checking
             }
         }
         double avgScore = currScore / simsPerMove;
@@ -86,14 +85,14 @@ void JungleRandSim::agentMove()
             bestStateId = stateId;
         }
     }
-    // Respond which move was chosen
+
     pos_t prevPos = currState.animalAt(nextStatesMoves[bestStateId].first, playsUp);
     pos_t destPos = prevPos;
     pos_t dest = nextStatesMoves[bestStateId].second;
     destPos.x += dest.x;
     destPos.y += dest.y;
 
-    // Bandaid fix for jumping
+    // Fix for jumping
     if (nextStatesMoves[bestStateId].first == Tiger || nextStatesMoves[bestStateId].first == Lion)
     {
         char destTile = getTile(destPos.x, destPos.y);
@@ -107,7 +106,8 @@ void JungleRandSim::agentMove()
     }
 
     currState = nextStates[bestStateId];
-    // printState(currState);
+
+    // Dueler communication
     printf("IDO %u %u %u %u\n", prevPos.x, prevPos.y, destPos.x, destPos.y);
     fflush(stdout);
 

@@ -3,6 +3,7 @@
 
 #include <ios>
 
+// Base class for operating on Jungle states
 class JungleBase
 {
 protected:

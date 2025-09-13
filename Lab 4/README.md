@@ -217,7 +217,7 @@ After sending `ONEMORE`, the players should acknowledge that a game has ended an
 
 **Ready timeout**: if a player does not send `RDY` within the projected time frame, the dueler considers that player timed out.
 
-**Move timeout**: if a player does not send a valid IDO within the `<move_time>` they were given, the dueler considers that player timed out.
+**Move timeout**: if a player does not send a valid `IDO` within the `<move_time>` they were given, the dueler considers that player timed out.
 
 **Player remaining time**: if the player’s `<remaining_time>` is exhausted before they make a move, the dueler considers that player timed out.
 

@@ -1,5 +1,6 @@
 #include "JungleQLearn.hpp"
 
+// Default values
 JungleQLearn::JungleQLearn() : JungleAgent(), w{},
                                learnRate(0.001),
                                discFact(0.99),
@@ -45,6 +46,7 @@ void JungleQLearn::printWeights()
     fprintf(stderr, "\n");
 }
 
+// Extract vector values of state
 std::array<double, JungleQLearn::FEATURE_COUNT> JungleQLearn::extractFeatures(const state_t &state, const Move &move)
 {
     std::array<double, FEATURE_COUNT> features{};
@@ -65,9 +67,9 @@ std::array<double, JungleQLearn::FEATURE_COUNT> JungleQLearn::extractFeatures(co
 
     constexpr int D_max = 10;
 
-    //  1) Material features 0..15
-    //  0..7   = my features
-    //  8..15  = opponent's
+    //  1) Material features 0...15
+    //  0...7   = own features
+    //  8...15  = opponent's
     for (uint8_t a = static_cast<uint8_t>(Rat); a <= static_cast<uint8_t>(Elephant); a++)
     {
         pos_t myPos = state.animalAt(static_cast<Animal>(a), playsUp);
@@ -84,9 +86,9 @@ std::array<double, JungleQLearn::FEATURE_COUNT> JungleQLearn::extractFeatures(co
             features[a + 8] = 0;
     }
 
-    //  2) Den distance features 16..31
-    //  16..23 my features
-    //  24..31 opponent's
+    //  2) Den distance features 16...31
+    //  16...23 my features
+    //  24...31 opponent's
     for (uint8_t a = static_cast<uint8_t>(Rat); a <= static_cast<uint8_t>(Elephant); a++)
     {
         pos_t myPos = state.animalAt(static_cast<Animal>(a), playsUp);
@@ -140,7 +142,7 @@ std::array<double, JungleQLearn::FEATURE_COUNT> JungleQLearn::extractFeatures(co
     }
 
     // 3.3) “Would mover be immediately captured?” → feature 34 = 1.0 if yes, else 0.0
-    /*
+    /* NOT IMPLEMENTED
     if (getCaptured(nextState, mover))
     {
         features[34] = 1.0;
@@ -179,18 +181,7 @@ double JungleQLearn::computeReward(const state_t &newState)
     // For wasting time
     return -0.001;
 }
-/*
-// TODO:
-bool JungleQLearn::getCaptured(const state_t &nextState, Animal mover)
-{
-    return false;
-}
-    */
-/*
-static double bellmanStep(state_t currState, Move move, state_t nextState)
-{
-}
-*/
+
 void JungleQLearn::updateWeights(const std::array<double, FEATURE_COUNT> &phi_sa, double reward, const std::array<double, FEATURE_COUNT> &phi_sp)
 {
 
@@ -206,6 +197,8 @@ void JungleQLearn::updateWeights(const std::array<double, FEATURE_COUNT> &phi_sa
         w[i] += learnRate * delta * phi_sa[i];
     }
 }
+
+// For Q-learning the agent treats as if it always plays down, it worked inconsistently otherwise
 void JungleQLearn::agentMove()
 {
     std::vector<Move> possMoves;
@@ -218,6 +211,7 @@ void JungleQLearn::agentMove()
         return;
 
     Move chosenMove;
+    // Either explore or choose a bestQ move
     if (uniReal(gen) < explr)
     {
         chosenMove = possMoves[moveDist(gen) % possMoves.size()];
@@ -241,6 +235,8 @@ void JungleQLearn::agentMove()
     pos_t offset = chosenMove.second;
     destPos.x += offset.x;
     destPos.y += offset.y;
+
+    // Fix for jumping
     if (chosenMove.first == Tiger || chosenMove.first == Lion)
     {
         char tile = getTile(destPos.x, destPos.y);
@@ -255,6 +251,7 @@ void JungleQLearn::agentMove()
     state_t nextState;
     moveState(canonState, chosenMove, nextState);
 
+    // Q-learning logic
     double r = computeReward(nextState);
 
     auto phi_sa = extractFeatures(canonState, chosenMove);
@@ -283,15 +280,13 @@ void JungleQLearn::agentMove()
 
     if (checkWin(nextState, playsUp) || checkWin(nextState, !playsUp))
     {
-        // maxQ_next = 0.0;
-        // bestNextPhi.fill(0.0);
-
         episodesDone++;
         explr = std::max(explrMin, explr * explrDecay);
     }
 
     updateWeights(phi_sa, r, bestNextPhi);
 
+    // Canonizing state
     currState = playsUp ? rotateState(nextState) : nextState;
 
     if (playsUp)
@@ -300,11 +295,12 @@ void JungleQLearn::agentMove()
         destPos = rotatePos(destPos);
     }
 
+    // Dueler communication
     printf("IDO %u %u %u %u\n", prevPos.x, prevPos.y, destPos.x, destPos.y);
     fflush(stdout);
-    // printWeights();
 }
 
+// Load weights from file
 bool JungleQLearn::loadWeights(const std::string &filename)
 {
     std::ifstream in(filename);
@@ -318,6 +314,7 @@ bool JungleQLearn::loadWeights(const std::string &filename)
     return true;
 }
 
+// Save weights to file
 bool JungleQLearn::saveWeights(const std::string &filename) const
 {
     std::ofstream out(filename);
@@ -330,6 +327,7 @@ bool JungleQLearn::saveWeights(const std::string &filename) const
     return true;
 }
 
+// Don't learn at all or explore
 void JungleQLearn::noTrainMode()
 {
     learnRate = 0;

@@ -5,6 +5,7 @@
 #include <math.h>
 #include <fstream>
 
+// A Q-learning driven agent
 class JungleQLearn : public JungleAgent
 {
     // The base player always plays down, rotated if plays up
@@ -26,7 +27,7 @@ private:
     std::array<double, FEATURE_COUNT> extractFeatures(const state_t &state, const Move &move);
     double computeQ(const std::array<double, FEATURE_COUNT> &features) const;
     double computeReward(const state_t &newState);
-    bool getCaptured(const state_t &nextState, Animal mover);
+    bool getCaptured(const state_t &nextState, Animal mover); // NOT IMPLEMENTED
     void updateWeights(const std::array<double, FEATURE_COUNT> &fun_sa,
                        double reward,
                        const std::array<double, FEATURE_COUNT> &next_sa);

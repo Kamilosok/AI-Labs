@@ -50,11 +50,11 @@ Move JungleDenRand::pickMove(const state_t &state)
     if (movesToDen.empty())
         return possMoves[moveDist(gen) % possMoves.size()];
 
-    // If heads
-    // if (moveDist(gen) % 2)
-    // return possMoves[moveDist(gen) % possMoves.size()];
-
-    return movesToDen[moveDist(gen) % movesToDen.size()];
+    // Coinflip to decide move type
+    if (moveDist(gen) % 2)
+        return possMoves[moveDist(gen) % possMoves.size()];
+    else
+        return movesToDen[moveDist(gen) % movesToDen.size()];
 }
 
 JungleDenRand::JungleDenRand() : JungleAgent()
@@ -81,7 +81,7 @@ void JungleDenRand::agentMove()
     destPos.x += dest.x;
     destPos.y += dest.y;
 
-    // Bandaid fix for jumping
+    // Fix for jumping
     if (bestMove.first == Tiger || bestMove.first == Lion)
     {
         char destTile = getTile(destPos.x, destPos.y);
@@ -95,8 +95,8 @@ void JungleDenRand::agentMove()
     }
 
     moveState(currState, bestMove, currState);
-    // printState(currState);
 
+    // Dueler communication
     printf("IDO %u %u %u %u\n", prevPos.x, prevPos.y, destPos.x, destPos.y);
     fflush(stdout);
 }

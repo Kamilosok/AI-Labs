@@ -4,9 +4,11 @@
 
 #include <math.h>
 
+// An MCTS-driven agent
 class JungleMCTS : public JungleAgent
 {
 private:
+    // A custom node for MCTS
     struct MCTSNode
     {
         state_t state;
@@ -30,7 +32,7 @@ private:
     double evaluate1(const state_t &state);
     double rollout(const state_t &startState);
     MCTSNode *expand(MCTSNode *node);
-    MCTSNode *bestChild(MCTSNode *node, double c); // wybór wg UCT
+    MCTSNode *bestChild(MCTSNode *node, double c);
     MCTSNode *treePolicy(MCTSNode *node);
     void backpropagate(MCTSNode *node, double value);
     void deleteSubtree(MCTSNode *root);

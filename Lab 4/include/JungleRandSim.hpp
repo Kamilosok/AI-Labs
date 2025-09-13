@@ -2,6 +2,7 @@
 #include "Common.hpp"
 #include "JungleAgent.hpp"
 
+// An agent moving based on evaluating Monte-Carlo rollouts
 class JungleRandSim : public JungleAgent
 {
 private:

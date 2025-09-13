@@ -16,9 +16,11 @@ bool train = false;
 std::random_device rd;
 auto seed = rd() ^ (std::chrono::high_resolution_clock::now().time_since_epoch().count());
 std::mt19937 gen(seed);
+// Potential max amount of moves, with a large margin for error
 std::uniform_int_distribution<uint8_t> moveDist(0, (1 << 7));
 
-std::unique_ptr<JungleAgent> creatJGAgent(AgentType aType)
+// Polymorphically create an agent
+std::unique_ptr<JungleAgent> createJGAgent(AgentType aType)
 {
     switch (aType)
     {
@@ -57,10 +59,11 @@ int main()
     train = true;
 #endif
 
+    // For dueler communication
     char duelerMsg[10];
     double move_timeout, remaining_time;
     bool knowWhoStarts = false;
-    auto agent = creatJGAgent(agentType);
+    auto agent = createJGAgent(agentType);
     state_t startState;
     agent->setState(startState);
     agent->setPlaysUp(false);
@@ -81,6 +84,7 @@ int main()
 
     scanf("\n%s", duelerMsg);
 
+    // Dueler logic
     while (true)
     {
         if (strcmp(duelerMsg, "ONEMORE") == 0)
@@ -132,18 +136,13 @@ int main()
                 {
                     state_t nextState;
                     JungleBase::moveState(prevState, Move(an, dest), nextState);
-                    // JungleBase::printState(nextState);
+
                     agent->setState(nextState);
                     break;
                 }
             }
-            // JungleBase::printState(agent->getState());
-            // fprintf(stderr, "\n");
+
             agent->agentMove();
-            /// JungleBase::printState(agent->getState());
-            // fprintf(stderr, "\n");
-            // fprintf(stderr, "\n");
-            //   usleep(800000);
         }
 
         scanf("%s", duelerMsg);
@@ -159,8 +158,8 @@ int main()
         if (auto qAgent = dynamic_cast<JungleQLearn *>(agent.get()))
         {
             qAgent->saveWeights("weights.txt");
+            fprintf(stderr, "Written weights to file!\n");
         }
-        fprintf(stderr, "Written weights to file!\n");
     }
 
     return 0;

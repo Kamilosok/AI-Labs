@@ -4,6 +4,7 @@
 
 #include <math.h>
 
+// A randomly playing agent
 class JungleRand : public JungleAgent
 {
 private:

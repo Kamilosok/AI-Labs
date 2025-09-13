@@ -19,6 +19,7 @@ void JungleRand::agentMove()
     std::vector<Move> possMoves;
     genMoves(currState, possMoves);
 
+    // Just randomly pick a move
     Move bestMove = possMoves[moveDist(gen) % possMoves.size()];
 
     pos_t prevPos = currState.animalAt(bestMove.first, playsUp);
@@ -27,7 +28,7 @@ void JungleRand::agentMove()
     destPos.x += dest.x;
     destPos.y += dest.y;
 
-    // Bandaid fix for jumping
+    // Fix for jumping
     if (bestMove.first == Tiger || bestMove.first == Lion)
     {
         char destTile = getTile(destPos.x, destPos.y);
@@ -41,8 +42,8 @@ void JungleRand::agentMove()
     }
 
     moveState(currState, bestMove, currState);
-    // printState(currState);
 
+    // Dueler communication
     printf("IDO %u %u %u %u\n", prevPos.x, prevPos.y, destPos.x, destPos.y);
     fflush(stdout);
 }

@@ -1,5 +1,6 @@
 #include "JungleBase.hpp"
 
+// Get type of tile
 char JungleBase::getTile(char x, char y)
 {
     if (y == 0 || y == 8)
@@ -222,7 +223,7 @@ bool JungleBase::moveState(const state_t &state, Move move, state_t &outState)
         char destTile = getTile(destPos.x, destPos.y);
         while (destTile == '~')
         {
-            // The dueler forbids jumping over own rat, so I have to forbid it too
+            // The dueler forbids jumping over own rat
             if (state.animalAt(Rat, !state.upMove) == destPos || state.animalAt(Rat, state.upMove) == destPos)
                 return false;
 
@@ -270,38 +271,35 @@ bool JungleBase::moveState(const state_t &state, Move move, state_t &outState)
         {
             if (upMoves)
             {
-                // printf("Capturing down animal!\n");
                 outState.down[a] = deadPos;
             }
             else
             {
-                // printf("Capturing up animal!\n");
                 outState.up[a] = deadPos;
             }
         }
     }
 
     // Moving into enemy den
+    /*
     if (!upMoves && destPos.x == 3 && destPos.y == 0)
     {
-        // Maybe do more, or other checkWin function
-        // printf("Down won!\n");
-        // printState(state);
+        printf("Down won!\n");
+        printState(state);
     }
     if (upMoves && destPos.x == 3 && destPos.y == 8)
     {
-        // Maybe do more, or other checkWin function
-        // printf("Up won!\n");
-        // printState(state);
+        printf("Up won!\n");
+        printState(state);
     }
+    */
 
     return true;
 }
 
-// Potentially slow, check times
+// Simply generate all valid states
 void JungleBase::genMoves(const state_t &state, std::vector<Move> &possMoves)
 {
-    // currState.upMove = playsUp;
     for (uint8_t a = static_cast<uint8_t>(Rat); a <= static_cast<uint8_t>(Elephant); a++)
     {
         Animal an = static_cast<Animal>(a);
@@ -314,15 +312,14 @@ void JungleBase::genMoves(const state_t &state, std::vector<Move> &possMoves)
             if (!valid)
                 continue;
 
-            // printState(nextState);
             possMoves.push_back({an, move});
         }
     }
 }
 
+// Simply generate all valid states, with possibility of rotation
 void JungleBase::genMoves(const state_t &state, std::vector<Move> &possMoves, bool rotated)
 {
-    // currState.upMove = playsUp;
     state_t canonState = rotated
                              ? rotateState(state)
                              : state;
@@ -339,7 +336,6 @@ void JungleBase::genMoves(const state_t &state, std::vector<Move> &possMoves, bo
             if (!valid)
                 continue;
 
-            // printState(nextState);
             possMoves.push_back({an, rotated ? rotateMove(move) : move});
         }
     }

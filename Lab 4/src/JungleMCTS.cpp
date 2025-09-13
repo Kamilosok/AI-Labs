@@ -3,7 +3,7 @@
 // Counted for up, then changed to fit the agent
 double JungleMCTS::evaluate1(const state_t &state)
 {
-    // 1) Material (rat=1 … elephant=8), zeroed if in trap:
+    // 1) Material (rat=1 ... elephant=8), zeroed if in trap:
     double M_up = 0, M_dn = 0;
     for (uint8_t a = static_cast<uint8_t>(Rat); a <= static_cast<uint8_t>(Elephant); a++)
     {
@@ -17,7 +17,6 @@ double JungleMCTS::evaluate1(const state_t &state)
     double hM = M_up - M_dn;
 
     // 2) Distance of major pieces to the opponent’s den (closer is better):
-    //    Only Lion, Tiger, Elephant
     double hD = 0;
     for (auto a : {Lion, Tiger, Elephant})
     {
@@ -46,7 +45,7 @@ double JungleMCTS::evaluate1(const state_t &state)
     modState.upMove = false;
     genMoves(modState, dnMoves);
     int32_t moves_down = dnMoves.size();
-    double hR = double(moves_up - moves_down) / 16.0; // normalize roughly by max moves
+    double hR = double(moves_up - moves_down) / 16.0; // normalize roughly
 
     // 4) Water control: rats in water
     pos_t ratUp = state.animalAt(Rat, true);
@@ -65,7 +64,7 @@ double JungleMCTS::evaluate1(const state_t &state)
         pos_t p = state.up[a];
         if (p == deadPos)
             continue;
-        // for each down move, see if it kills this piece
+
         modState.upMove = false;
         for (Move m : dnMoves)
         {
@@ -98,7 +97,7 @@ double JungleMCTS::evaluate1(const state_t &state)
     }
     double hT = -0.5 * (upThreats - dnThreats);
 
-    // 6) Trap control: number of own pieces in opponent’s traps (good) minus enemy pieces in my traps (bad)
+    // 6) Trap control: number of own pieces in opponent’s traps (good) minus enemy pieces in own traps (bad)
     int upInDownTraps = 0, dnInUpTraps = 0;
     for (uint8_t a = static_cast<uint8_t>(Rat); a <= static_cast<uint8_t>(Elephant); a++)
     {
@@ -114,7 +113,7 @@ double JungleMCTS::evaluate1(const state_t &state)
     double winUp = checkWin(state, true) ? 1.0 : 0.0;
     double winDown = checkWin(state, false) ? 1.0 : 0.0;
 
-    // Combine with tuned weights:
+    // Weights
     constexpr double wM = 10.0;
     constexpr double wD = 8.0;
     constexpr double wR = 1.0;
@@ -139,7 +138,6 @@ double JungleMCTS::evaluate1(const state_t &state)
     return playsUp ? norm : -norm;
 }
 
-// POTENTIALLY SHORTEN WITH HEURISTIC FUNCTION
 double JungleMCTS::rollout(const state_t &startState)
 {
     state_t st = startState;
@@ -166,9 +164,8 @@ double JungleMCTS::rollout(const state_t &startState)
         if (noCaptureCount >= MAX_NO_CAPTURE)
             return evaluate1(st);
 
-        if (moveCount >= 75)
+        if (moveCount >= MAX_NO_CAPTURE)
         {
-            // fprintf(stderr, "BBB\n");
             return evaluate1(st);
         }
 
@@ -190,8 +187,6 @@ JungleMCTS::MCTSNode *JungleMCTS::expand(MCTSNode *node)
     moveState(node->state, mov, nextState);
     MCTSNode *childNode = new MCTSNode(nextState, node, mov);
 
-    // Always > 20
-    // fprintf(stderr, "%lu\n", childNode->untriedMoves.size());
     node->children.push_back(childNode);
 
     return childNode;
@@ -214,7 +209,6 @@ JungleMCTS::MCTSNode *JungleMCTS::bestChild(MCTSNode *node, double c)
         {
             bestUCT = UCT;
             bestChild = child;
-            // fprintf(stderr, "Reward: %lf\n", bestUCT);
         }
     }
 
@@ -232,8 +226,7 @@ JungleMCTS::MCTSNode *JungleMCTS::treePolicy(MCTSNode *node)
             node = bestChild(node, explorationConstant);
         }
     }
-    // Never reaches
-    // fprintf(stderr, "hhh\n");
+
     return node;
 }
 
@@ -282,18 +275,16 @@ JungleMCTS::~JungleMCTS()
 
 void JungleMCTS::agentMove()
 {
-    // fprintf(stderr, "%lf\n", evaluate1(currState));
-
     // Dummy move with no parent
     if (!root)
     {
-
         root = new MCTSNode(currState, nullptr, Move(Rat, {0, 0}));
         ogRoot = root;
     }
 
     bool found = false;
 
+    // Reusing already built tree
     for (auto child : root->children)
     {
         if (child->state == currState)
@@ -312,12 +303,14 @@ void JungleMCTS::agentMove()
 
     root->visitCount = 1;
     root->totalValue = 0;
+    // Classic MCTS logic
     for (uint32_t iter = 0; iter < simsPerMove; iter++)
     {
         MCTSNode *leaf = treePolicy(root);
         double reward = rollout(leaf->state);
         backpropagate(leaf, reward);
     }
+
     // Pick most valuable move
     MCTSNode *best = bestChild(root, 0.0);
     Move bestMove = best->moveFromParent;
@@ -328,7 +321,7 @@ void JungleMCTS::agentMove()
     destPos.x += dest.x;
     destPos.y += dest.y;
 
-    // Bandaid fix for jumping
+    // Fix for jumping
     if (bestMove.first == Tiger || bestMove.first == Lion)
     {
         char destTile = getTile(destPos.x, destPos.y);
@@ -342,11 +335,12 @@ void JungleMCTS::agentMove()
     }
 
     currState = best->state;
-    // printState(currState);
 
+    // Dueler communication
     printf("IDO %u %u %u %u\n", prevPos.x, prevPos.y, destPos.x, destPos.y);
     fflush(stdout);
 
+    // Cleaning unwanted children
     for (auto child : root->children)
     {
         if (child != best)

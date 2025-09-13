@@ -9,6 +9,7 @@
 #include <chrono>
 #include <algorithm>
 
+// Enum for referring to different types of agents for Jungle
 enum AgentType : uint8_t
 {
     agentRandSim = 0,
@@ -30,10 +31,10 @@ enum Animal : uint8_t
     Elephant
 };
 
+// Values for heuristically evaluating states
 inline constexpr std::array<double, 8> animalValues = {.4, 0.1, 0.2, .3, .5, .7, .8, 1.0};
 
-inline char
-getAnimalChar(Animal a, bool isUp)
+inline char getAnimalChar(Animal a, bool isUp)
 {
     switch (a)
     {
@@ -88,14 +89,16 @@ inline pos_t rotateMove(pos_t move)
 
 inline constexpr std::array<pos_t, 4> moveList = {UP, DOWN, LEFT, RIGHT};
 
+// If an animal is set to this position, it's dead
 inline constexpr pos_t deadPos = pos_t{.x = -1, .y = -1};
+
 inline constexpr pos_t upDen = {.x = 3, .y = 0};
 inline constexpr pos_t downDen = {.x = 3, .y = 8};
 
+// Max simulation depth without taking a piece
 inline constexpr uint8_t MAX_NO_CAPTURE = 50;
 
 extern std::mt19937 gen;
-// Potential amount of different moves, 2^3 animals, each one with 2^2 moves
 extern std::uniform_int_distribution<uint8_t> moveDist;
 
 constexpr bool operator==(const pos_t &lhs, const pos_t &rhs)
@@ -110,6 +113,7 @@ constexpr bool operator!=(const pos_t &lhs, const pos_t &rhs)
 
 struct state_t
 {
+    // Which player moves next
     bool upMove = false;
 
     std::array<pos_t, static_cast<uint8_t>(Elephant) + 1>
