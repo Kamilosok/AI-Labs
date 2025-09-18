@@ -16,7 +16,7 @@ JungleRandSim::~JungleRandSim()
     nextStatesMoves.clear();
 }
 
-// Generate next states to ultimatelt choose the best one with Monte-Carlo method
+// Generate next states to ultimately choose the best one with Monte-Carlo method
 void JungleRandSim::genNextStates()
 {
     // currState.upMove = playsUp;

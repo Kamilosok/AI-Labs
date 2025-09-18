@@ -21,9 +21,16 @@ Exactly **X** lines, each with **Y** characters so that the image fulfills the n
 
 > **Note:** There may be multiple valid solutions.
 
+### Solution E1
+
+The solution consists of one file:  
+[src/zad1.cpp](src/zad1.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-    The solution in the Lab 2 folder worked for most of the examples in the time limit provided by the professor. In the Lab 3 folder there exist a solution that solves these examples in the time limit, but loses a bit score due to method used.
+
+  The solution in the Lab 2 folder worked for most of the examples in the time limit provided by the professor. In the Lab 3 folder there exist a [much better solution](../Lab%203/src/zad2.cpp) that solves these examples in the time limit, but loses a bit of score due to method used being the one from [Lab 3 Exercise 2](../Lab%203/README.md#exercise-2-nonogram-solving-with-backtracking).
+
 </details>
 
 ## Exercise 2: Commando in a Maze
@@ -61,6 +68,11 @@ Output a single line with your move sequence consisting only of the characters `
 
 > **Note:** There may be multiple valid solutions
 
+### Solution E2
+
+The solution consists of one file:  
+[src/zad2.cpp](src/zad2.cpp).
+
 <details>
   <summary>Notes about solution</summary>
     The proffesor stated that the initial uncertainty reduction could be performed by using trial and error to get a <i> good enough </i> sequence, hence my solution uses that fact.
@@ -84,6 +96,11 @@ Write to `zad3_output.txt`
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
 
+### Solution E3
+
+The solution consists of one file:  
+[src/zad3.cpp](src/zad3.cpp).
+
 ## Exercise 4: Inadmissible Heuristic Tuning
 
 Building on your solver from **Exercise 3**, you now must **modify** the heuristic so that it becomes **inadmissible** (i.e. no longer guaranteed to preserve optimality). Your modified heuristic must introduce a tunable parameter **ε** (the “degree of inadmissibility”).
@@ -100,9 +117,14 @@ Write to `zad4_output.txt`
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
 
+### Solution E4
+
+The solution consists of one file:  
+[src/zad4.cpp](src/zad4.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-    Due to nature of the labs, it was easier to repeat code in a different file and not build upon zad3.cpp . I know that it's not the <i> best way </i>, but simply incorporating the degree of inadmissability of 1 as default to the previous exercise seemed unelegant, therefore exercise 4 is a standalone program.
+  The code is in a separate file, because the python-based validator provided by the professor didn't allow for easy <i>option setting</i> with command-line arguments, and at the time i forgot I could just add a make flag.
 </details>
 
 ## Exercise 5: Hybrid Commando Solver
@@ -124,9 +146,15 @@ Write to `zad5_output.txt`.
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
 
+### Solution E5
+
+The solution consists of one file:  
+[src/zad5.cpp](src/zad5.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-For the same reasons as in Exercise 4, exercise 5 is a standalone program.
+
+For the same reasons as in [Exercise 4](#solution-e4), exercise 5 is a standalone program.
 </details>
 
 ---

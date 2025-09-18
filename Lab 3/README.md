@@ -21,9 +21,15 @@ Exactly **X** lines, each with **Y** characters so that the image fulfills the n
 - `.` for an empty *(white)* cell  
 - `#` for a filled *(black)* cell
 
+### Solution E1
+
+The solution consists of one file:  
+[src/zad1.cpp](src/zad1.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-For the same reasons as in Lab 2, this exercise is a standalone program.
+
+  For the same reasons as in [Lab 2](../Lab%202/README.md#solution-e4), this exercise is a standalone program.
 </details>
 
 ## Exercise 2: Nonogram Solving with Backtracking
@@ -47,9 +53,15 @@ Exactly **X** lines, each with **Y** characters so that the image fulfills the n
 - `.` for an empty *(white)* cell  
 - `#` for a filled *(black)* cell
 
+### Solution E2
+
+The solution consists of one file:  
+[src/zad2.cpp](src/zad2.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-For the same reasons as in Lab 2 and so forth, this exercise is a standalone program.
+
+  For the same reasons as in [Lab 2](../Lab%202/README.md#solution-e4), this exercise is a standalone program.
 </details>
 
 ---

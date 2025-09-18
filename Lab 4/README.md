@@ -79,25 +79,66 @@ The agent should choose moves as follows:
 
 5. **Selection**: choose the move `m` whose state `s` yields the best estimated score (e.g. highest proportion of playouts won by the side to move).
 
+### Solution E3
+
+The solution is located in the following files:
+
+- [src/JungleRandSim.cpp](src/JungleRandSim.cpp) – implementation of the Monte-Carlo style Jungle agent
+- [src/Main.cpp](src/Main.cpp) – entrypoint used to run the agent
+
+This solution reuses the common Jungle infrastructure from:
+
+- [src/JungleBase.cpp](src/JungleBase.cpp), [include/JungleBase.hpp](include/JungleBase.hpp)
+- [src/JungleAgent.cpp](src/JungleAgent.cpp), [include/JungleAgent.hpp](include/JungleAgent.hpp)
+- [include/Common.hpp](include/Common.hpp)
+
 ## Exercise 4: Heuristic Jungle Agent
 
 Write an agent that consistently defeats the agent from **Exercise 3**.
 
 Unlike the random playout-based strategy, this agent must rely on a **heuristic evaluation function** to assess moves or board positions. The heuristic can use any reasonable factors you design *(e.g., material balance, positional features, control of traps, proximity to the opponent’s den, etc.)*. The agent may run up to 4x slower than the **Exercise 3** agent.
 
+### Solution E4
+
+The solution is located in the following files:
+
+- [src/JungleMCTS.cpp](src/JungleMCTS.cpp) – the implementation of the Monte-Carlo Jungle agent uses a heuristic function
+- [src/Main.cpp](src/Main.cpp) – entrypoint used to run the agent
+
+This solution reuses the common Jungle infrastructure from:
+
+- [src/JungleBase.cpp](src/JungleBase.cpp), [include/JungleBase.hpp](include/JungleBase.hpp)
+- [src/JungleAgent.cpp](src/JungleAgent.cpp), [include/JungleAgent.hpp](include/JungleAgent.hpp)
+- [include/Common.hpp](include/Common.hpp)
+
 ## Exercise 5: Jungle Implementation
 
 Implement the Jungle game inteface without the validator.
 > By default a Jungle interface was available via a python program.
 
+### Solution E5
+
+The Jungle game interface was implemented in:
+
+- [src/JungleBase.cpp](src/JungleBase.cpp)  
+- [include/JungleBase.hpp](include/JungleBase.hpp)
+- [include/Common.hpp](include/Common.hpp)
+
+Other agents rely on this implementation.
+
 <details>
   <summary>Notes about solution</summary>
-    Due to me not using the preffered language for this course (Python), I implemented the game in the first solved exercise with <code>JungleBase.cpp</code> and <code>JungleBase.hpp</code>
+    Due to me not using the preffered language for this course (Python), I implemented the game before any agents.
 </details>
 
 ## Exercise 6: Jungle bosses
 
-Adjust your agents' communication protocol to `dueler.py` and defeat the prepared bosses.
+Adjust your agents' communication protocol to the [dueler protocol](#dueler-protocol) and defeat the prepared bosses.
+
+<details>
+  <summary>Notes about solution</summary>
+  All of my agents use this protocol, so this exercise was solved using the smartest one by testing (it turned out to be the MCTS).
+</details>
 
 ## Exercise 7: Chess agent
 
@@ -118,6 +159,19 @@ Implement the **Monte Carlo Tree Search (MCTS)** algorithm for it, and then:
 You may use `dueler.py` for your experiments.  
 If you have already used **MCTS** for the chosen game in a previous exercise, then in this exercise you should instead implement **Alpha-Beta Search**.
 
+### Solution E9
+
+The solution consists of:
+
+- [src/JungleMCTS.cpp](src/JungleMCTS.cpp)  
+- [src/Main.cpp](src/Main.cpp) – entrypoint for running the MCTS agent  
+
+This solution reuses the common Jungle infrastructure from:
+
+- [src/JungleBase.cpp](src/JungleBase.cpp), [include/JungleBase.hpp](include/JungleBase.hpp)
+- [src/JungleAgent.cpp](src/JungleAgent.cpp), [include/JungleAgent.hpp](include/JungleAgent.hpp)
+- [include/Common.hpp](include/Common.hpp)
+
 <details>
   <summary>Notes about solution</summary>
     I obviously chose Jungle for this exercise, and solved it with MCTS.
@@ -125,7 +179,7 @@ If you have already used **MCTS** for the chosen game in a previous exercise, th
 
 ## Dueler protocol
 
-Two player programs communicate with the match harness over **stdin/stdout** using a simple text protocol. All messages are ASCII lines terminated by `\n`.
+Two player programs communicate with the dueler over **stdin/stdout** using a simple text protocol. All messages are ASCII lines terminated by `\n`.
 
 The dueler alternates between two players P0 (lower) and P1 (upper).
 

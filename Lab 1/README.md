@@ -43,6 +43,11 @@ Write to `zad1_output.txt`
 - If checkmate can be forced (with Black’s cooperation), output the **minimum number of moves** required.
 - If the position inevitably leads to stalemate before mate, output: `INF`
 
+### Solution E1
+
+The solution consists of one file:  
+[src/zad1.cpp](src/zad1.cpp).
+
 <details>
   <summary>Notes about solution</summary>
     In my debug mode I print the whole chessboard.
@@ -86,10 +91,18 @@ The input string **t** with spaces inserted according to the optimal segmentatio
 
 `tama tematy kapustki nie z nosi`
 
+### Solution E2
+
+The solution consists of one file:  
+[src/zad2.cpp](src/zad2.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-    These additional steps were requested by the proffesor or Exercise instructor for education purposes. <br>
-    In the <b>utils/</b> folder zad2Random uses a random segmentation method, tadeusz_process.cpp was used to prepare <i> Pan Tadeusz </i> by Adam Mickiewicz for this exercise, and tadeusz_comp.cpp to compare the output from a program using the max-square method to a program using a random method.
+
+  These additional steps were requested by the professor or Exercise instructor for educational purposes.
+
+  A random segmentation method was implemented in [utils/zad2Random.cpp](utils/zad2Random.cpp).  
+  The file [utils/tadeusz_process.cpp](utils/tadeusz_process.cpp) was used to prepare <i>Pan Tadeusz</i> by Adam Mickiewicz for this exercise, <br> and [utils/tadeusz_comp.cpp](utils/tadeusz_comp.cpp) was used to compare the output from a program using the max-square method with one using a random method.
 </details>
 
 ## Exercise 3: Poker-Hand Simulation – “Face Player” vs. “Pip Player"
@@ -107,12 +120,18 @@ Using this program *(and conducting several experiments)*, we will check how the
 
 Propose a deck for the **Pip Player** (with as many cards as possible) that will statistically give him victory.
 
+### Solution E3
+
+The solution consists of one file:  
+[src/zad3.cpp](src/zad3.cpp).
+
 <details>
   <summary>Notes about solution</summary>
-    The main program estimates the <b>Pip Player's</b> victory chance by generating random valid hands for both players and comparing them. The program may take in one argument, the amount of low-ranked pips that the <b>Pip player</b> discards. <br>
-    Tests show that higher amount of discards increase victory chance. <br>
-    In the <b>utils/</b> folder zad3Spec.cpp program computes the exact victory chance without discards. <br>
-    In the original problem spec the author used weird naming conventions (<b>Blotkarz</b> for <b>Pip Player</b> and <b>Figurant</b> for <b>Face Player</b>), which is reflected in some naming conventions in the code.
+
+  The main program estimates the <b>Pip Player's</b> victory chance by generating random valid hands for both players and comparing them. The program may take in one argument, the amount of low-ranked pips that the <b>Pip player</b> discards. <br>
+  Tests show that higher amount of discards increase victory chance. <br>
+  The program in [utils/zad3Spec.cpp](utils/zad3Spec.cpp) computes the exact victory chance without discards. <br>
+  In the original problem spec the author used weird naming conventions (<b>Blotkarz</b> for <b>Pip Player</b> and <b>Figurant</b> for <b>Face Player</b>), which is reflected in some naming conventions in the code.
 </details>
 
 ## Exercise 4: Single-Block Nonogram Edit Distance
@@ -146,6 +165,11 @@ For the initial sequence `0010001000`:
 | 1 | 1             |
 | 0 | 2             |
 
+### Solution E4
+
+The solution consists of one file:  
+[src/zad4.cpp](src/zad4.cpp).
+
 ## Exercise 5: Heuristic Nonogram Solver (WalkSAT-Style)
 
 Implement a simplified nonogram solver using the following heuristic *(inspired by WalkSAT)*:
@@ -178,6 +202,11 @@ Exactly **X** lines, each with **Y** characters so that the image fulfills the n
 - `#` for a filled (black) cell
 
 > **Note:** There may be multiple valid solutions.
+
+### Solution E5
+
+The solution consists of one file:  
+[src/zad5.cpp](src/zad5.cpp).
 
 ---
 

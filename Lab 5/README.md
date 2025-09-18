@@ -36,6 +36,11 @@ Additionally, a **bonus** of `max(0, (200 - W)/100)` is awarded, where `W` is th
 
 > I included the scoring system because I quickly wrote a program to get *some* points, not all of them.
 
+### Solution E2
+
+The solution consists of one file:  
+[src/Main.cpp](src/Main.cpp) and [include/Common.hpp](include/Common.hpp).
+
 <details>
   <summary>Notes about solution</summary>
     The solution uses a slightly improved greedy/dfs algorithm.
@@ -63,9 +68,25 @@ Use **Q-learning** to train an agent (or agents) that achieves a **positive expe
 - Features should account for **captures** and differentiate between the types of pieces.  
 - Present the **learned parameters** and comment on whether they align with your **intuitive expectations** of the game.
 
+### Solution E7
+
+The Q-learning agent is in:
+
+[Lab 4/src/JungleQLearn.cpp](../Lab%204/src/JungleQLearn.cpp)
+
+While the variant A and B agents are in:
+
+[Lab 4/src/JungleRand.cpp](../Lab%204/src/JungleRand.cpp) and [Lab 4/src/JungleDenRand.cpp](../Lab%204/src/JungleDenRand.cpp) respectively.
+
+[src/Main.cpp](src/Main.cpp) – entrypoint for running the MCTS agents
+
+This solution reuses the common Jungle infrastructure from:
+
+- [Lab 4/src/JungleBase.cpp](../Lab%204/src/JungleBase.cpp), [Lab 4/include/JungleBase.hpp](../Lab%204/include/JungleBase.hpp)
+- [Lab 4/src/JungleAgent.cpp](../Lab%204/src/JungleAgent.cpp), [Lab 4/include/JungleAgent.hpp](../Lab%204/include/JungleAgent.hpp)
+- [Lab 4/include/Common.hpp](../Lab%204/include/Common.hpp)
+
 <details>
   <summary>Notes about solution</summary>
     The solution is in the Lab 4 folder because otherwise it would require duplicating Base files and the ease of polymorphing the agent for using different algorithms was simply too convenient to ignore.
 </details>
-
-The solution is in [Lab 4](../Lab%204/)
