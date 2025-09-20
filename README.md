@@ -15,10 +15,26 @@ Each list of lab exercises is self-contained in its own folder with source code,
     Contains source code for solutions of exercises, each in it's own file.
 - **data/** (optional)  
   Any raw or large input files.
-- **utils/** (optional)  
-  Additional scipts or modifications of solutions for additional purposes.
+- **utils/**
+  Additional scipts or modifications of solutions for additional purposes and the **validator**.
 - **tests/**  
-  Paired input/expected‐output files for each task.
+  Paired input/expected‐output files for each task. Intended only for use by the **validator**.
+  Test files follow the naming scheme:
+
+- `inX_Y.txt` – input for **exercise X**, test **Y**  
+- `outX_Y.txt` – expected output for **exercise X**, test **Y**
+
+---
+
+### Validator usage
+
+The validator script automates running your solution on all test cases for a given exercise and compares the output with the expected results.
+
+Syntax:
+
+`utils/validator.sh <exercise-number> <program> [program-args...]`
+
+---
 
 ### Labs 4, 5 follow the following structure
 
