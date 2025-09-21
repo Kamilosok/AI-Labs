@@ -3,3 +3,8 @@
 
 # Editor
 .vscode
+
+# Compiled binaries
+*.o
+*.out
+*.exe

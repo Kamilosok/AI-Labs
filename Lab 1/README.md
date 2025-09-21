@@ -144,13 +144,13 @@ Your goal is to find the **minimum number of bit flips** required so that the fi
 
 Read from `zad4_input.txt`
 
-One line that contains: `bits`: a string of `0` and `1` characters of some length **N** and `D`: an integer (0 ≤ `D` ≤ **N**), the desired block length, separated by a space.
+Some **M** lines that contain: `bits`: a string of `0` and `1` characters of some length **N** and `D`: an integer (0 ≤ `D` ≤ **N**), the desired block length, separated by a space.
 
 ### Output E4
 
 Write to `zad4_output.txt`
 
-Output a single integer `m`, so that `m` is the minimum number of bit flips from the input sequence so that a sequence of bits that satisfies the exercise conditions can be achieved.
+Output **M** integers, so that `m` is the minimum number of bit flips from the sequence of input sequences so that a sequence of bits that satisfies the line conditions can be achieved. Answer the lines in the order provided.
 
 ### Example E4
 
