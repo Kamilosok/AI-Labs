@@ -278,7 +278,7 @@ struct state_hash
         std::size_t seed = s.size();
         for (const auto &p : s)
         {
-            // Łączymy hash pierwszej i drugiej składowej
+            // Adding the hashes of the first and second one
             seed ^= std::hash<int>()(p.first) + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2);
             seed ^= std::hash<int>()(p.second) + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2);
         }
@@ -333,7 +333,7 @@ int main(int argc, char *argv[])
 {
     std::ios::sync_with_stdio(false);
 
-    bool inGiven = 0, outGiven = 0;
+    bool inGiven = 0, outGiven = 0, verbose = 0;
 
     std::ifstream in;
     std::ofstream out;
@@ -341,6 +341,11 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
+
+        if (arg == "--verbose")
+        {
+            verbose = 1;
+        }
 
         if (!inGiven)
         {
@@ -423,9 +428,24 @@ int main(int argc, char *argv[])
     dists = computeDistanceMatrix();
 
     // printDistanceMatrix();
-    // printLabyrinth(startPositions);
 
     pathS += findSynchronizingWord();
+
+    if (verbose)
+        printLabyrinth(startPositions);
+
+    state_t verboseState = startPositions;
+
+    if (verbose)
+    {
+        printLabyrinth(verboseState);
+
+        for (auto c : pathS)
+        {
+            verboseState = movePositions(verboseState, c);
+            printLabyrinth(verboseState);
+        }
+    }
 
     out << (pathS).c_str();
     in.close();

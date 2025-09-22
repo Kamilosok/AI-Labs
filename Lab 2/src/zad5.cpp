@@ -287,7 +287,7 @@ int main(int argc, char *argv[])
 {
     std::ios::sync_with_stdio(false);
 
-    bool inGiven = 0, outGiven = 0;
+    bool inGiven = 0, outGiven = 0, verbose = 0;
 
     std::ifstream in;
     std::ofstream out;
@@ -295,6 +295,11 @@ int main(int argc, char *argv[])
     for (int i = 1; i < argc; i++)
     {
         std::string arg = argv[i];
+
+        if (arg == "--verbose")
+        {
+            verbose = 1;
+        }
 
         if (!inGiven)
         {
@@ -373,6 +378,7 @@ int main(int argc, char *argv[])
     }
 
     std::string pathS = "";
+    state_t verboseState = startPositions;
 
     // Uncertainty reducing and heuristic multiplier for unoptimal but faster solutions
 
@@ -417,9 +423,22 @@ int main(int argc, char *argv[])
     dists = computeDistanceMatrix();
 
     // printDistanceMatrix();
-    // printLabyrinth(startPositions);
 
     pathS += findSynchronizingWord();
+
+    if (verbose)
+        printLabyrinth(startPositions);
+
+    if (verbose)
+    {
+        printLabyrinth(verboseState);
+
+        for (auto c : pathS)
+        {
+            verboseState = movePositions(verboseState, c);
+            printLabyrinth(verboseState);
+        }
+    }
 
     out << (pathS).c_str();
     in.close();

@@ -66,7 +66,7 @@ Write to `zad2_output.txt`
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
 
-> **Note:** There may be multiple valid solutions
+> **Note:** There may be multiple valid solutions, because of that the tests can't be simply checked with a pre-made out2_X.txt, therefore the one can check the validity of the solution with a `--verbose` flag
 
 ### Solution E2
 
@@ -96,6 +96,8 @@ Write to `zad3_output.txt`
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
 
+> **Note:** There may be multiple valid solutions, because of that the tests can't be simply checked with a pre-made out3_X.txt, therefore the one can check the validity of the solution with a `--verbose` flag
+
 ### Solution E3
 
 The solution consists of one file:  
@@ -104,6 +106,8 @@ The solution consists of one file:
 ## Exercise 4: Inadmissible Heuristic Tuning
 
 Building on your solver from **Exercise 3**, you now must **modify** the heuristic so that it becomes **inadmissible** (i.e. no longer guaranteed to preserve optimality). Your modified heuristic must introduce a tunable parameter **ε** (the “degree of inadmissibility”).
+
+Use tests from [Exercise 3](#exercise-3-optimal-commando-path-with-a-search).
 
 ### Input E4
 
@@ -116,6 +120,8 @@ The file contains a series of lines (all the same length), each consisting solel
 Write to `zad4_output.txt`
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
+
+> **Note:** There may be multiple valid solutions, because of that the tests can't be simply checked with a pre-made out4_X.txt, therefore the one can check the validity of the solution with a `--verbose` flag
 
 ### Solution E4
 
@@ -134,6 +140,8 @@ Combine and extend your solutions from Exercises 2–4 into a single hybrid algo
 1. **Solves** all of the **Exercise 4** test mazes within the time limit (same input format, same size constraints).  
 2. **Produces** overall **shorter** move sequences (sum of lengths) than your pure BFS‐based solution from **Exercise 2**.
 
+Use tests from [Exercise 2](#exercise-2-commando-in-a-maze) and [Exercise 3](#exercise-3-optimal-commando-path-with-a-search).
+
 ### Input E5
 
 Read from `zad5_input.txt`
@@ -145,6 +153,8 @@ The file contains a series of lines (all the same length), each consisting solel
 Write to `zad5_output.txt`.
 
 Output a single line with your move sequence consisting only of the characters `U`, `D`, `L` or `R`. There should be no breaks in between the characters.
+
+> **Note:** There may be multiple valid solutions, because of that the tests can't be simply checked with a pre-made out5_X.txt, therefore the one can check the validity of the solution with a `--verbose` flag
 
 ### Solution E5
 
