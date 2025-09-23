@@ -2,6 +2,8 @@
 
 For testing your agents in these exercises you may use the [dueler](#dueler-protocol).
 
+> The dueler isn't finished at this time.
+
 ## Exercise 1: Reversi agent
 
 > I didn't solve this exercise
@@ -178,6 +180,8 @@ This solution reuses the common Jungle infrastructure from:
 </details>
 
 ## Dueler protocol
+
+> Note: Rewriting the dueler would take some work, hence the testing for this Lab list should be done at one's convenience for testing.
 
 Two player programs communicate with the dueler over **stdin/stdout** using a simple text protocol. All messages are ASCII lines terminated by `\n`.
 

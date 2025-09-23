@@ -46,6 +46,4 @@ Syntax:
   Public header files defining common utilities, or abstract bases.
 - **src/**  
   Implementation files for the solutions.
-- **tests/**  
-  TODO
   

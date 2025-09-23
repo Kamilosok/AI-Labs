@@ -18,10 +18,10 @@ You have 24 squares with side lengths 1, 2, 3, ..., 24. Write a program that **p
 - **Next 70 lines:** each line contains 70 characters representing the placement of the squares.
   - Use `.` for empty cells.
   - Use letters `A`-`X` to represent squares of size 1-24, respectively:
-    - `A` → square of side 1
-    - `B` → square of side 2
+    - `A` -> square of side 1
+    - `B` -> square of side 2
     - ...
-    - `X` → square of side 24
+    - `X` -> square of side 24
 
 ### Scoring
 
@@ -34,7 +34,7 @@ Points are awarded as follows:
 
 Additionally, a **bonus** of `max(0, (200 - W)/100)` is awarded, where `W` is the number of empty cells. To get this bonus, your program may run longer—but short enough to be demonstrable in the lab.
 
-> I included the scoring system because I quickly wrote a program to get *some* points, not all of them.
+> I included the scoring system because I quickly wrote a program to get *some* points, not all of them. Also because of this there are no tests.
 
 ### Solution E2
 
