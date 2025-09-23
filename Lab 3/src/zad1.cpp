@@ -652,25 +652,11 @@ int main(int argc, char *argv[])
 
     for (unsigned int j = 0; j < rows.size(); j++)
     {
-        printf("Row: %u\n", j);
         for (unsigned int i = 0; i < rowPossibilities[j].size(); i++)
         {
             printLine(rowPossibilities[j][i], cols.size());
         }
-        printf("\n");
     }
-
-    for (unsigned int j = 0; j < cols.size(); j++)
-    {
-        printf("Col: %u\n", j);
-        for (unsigned int i = 0; i < colPossibilities[j].size(); i++)
-        {
-            printLine(colPossibilities[j][i], rows.size());
-        }
-        printf("\n");
-    }
-
-    // printToFile(&out, sureBlacks, rows.size(), cols.size());
 
     for (int i = 0; i < rows.size(); i++)
     {

@@ -751,7 +751,7 @@ int main(int argc, char *argv[])
 
     if (!solutionFound)
     {
-        printf("Brak rozwiązania nonogramu!\n");
+        printf("No nonogram solution found!\n");
     }
     else
     {
