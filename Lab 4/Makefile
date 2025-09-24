@@ -23,6 +23,7 @@ else
   CXXFLAGS := $(BASEFLAGS) $(DEBUGFLAGS)
 endif
 
+# USE ONLY ONE OF THE MODES, OTHERWISE IT WILL BE SET BY THIS ORDER
 ifeq ($(RS),1)
   CXXFLAGS += -DRS
 endif
@@ -63,7 +64,7 @@ debug: compile
 
 prod: compile
 
-# KOMPILACJA I LINKOWANIE
+# COMPILING AND LINKING
 compile: $(MAIN_O) $(SRC_O) | $(OBJDIR) $(INCDIR)
 	@echo "BUILD=$(BUILD)"
 	@echo "Linking $(TARGET)"
@@ -77,11 +78,11 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) $(INCDIR)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-# Pomiar czasu wykonania
+# Time checking
 time: all
 	@/usr/bin/time -v ./$(TARGET)
 
-# Sprawdzenie rozmiaru i zależności
+# Size checking
 size: all
 	@ldd ./$(TARGET) \
 	  | awk '{print $$3}' \

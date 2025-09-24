@@ -90,3 +90,23 @@ This solution reuses the common Jungle infrastructure from:
   <summary>Notes about solution</summary>
     The solution is in the Lab 4 folder because otherwise it would require duplicating Base files and the ease of polymorphing the agent for using different algorithms was simply too convenient to ignore.
 </details>
+
+---
+
+## Makefile usage
+
+### Base build modes
+
+- `make debug` (default) - debug build with `-g`, no optimizations, and address sanitizer.
+- `make prod` – optimized release build with warnings enabled.
+- `make clean` – remove object files and built binaries.
+
+### Utilities
+
+- `make time` – run the binary with `/usr/bin/time -v`.
+- `make size` – display disk usage of linked libraries and the binary.
+
+---
+
+> **Source:**
+> This list of problems was assigned as part of the *Artificial Intelligence* (SI) course in the 2025 Summer semester at the University of Wrocław by Paweł Rychlikowski

@@ -283,5 +283,33 @@ After sending `ONEMORE`, the players should acknowledge that a game has ended an
 
 **Harness exception handling**: on timeout or wrong move the dueler awards the win to the player that didn't initiate the exception, and proceeds as if a game ended normally.
 
+---
+
+## Makefile usage
+
+### Base build modes
+
+- `make debug` (default) - debug build with `-g`, no optimizations, and address sanitizer.
+- `make prod` – optimized release build with warnings enabled.
+- `make clean` – remove object files and built binaries.
+
+### Choosing agent type
+
+Choose the agent type to build by appending **one** of the following variables:  e.g. `make prod RS=1`.
+
+- `RS=1` -> Monte-Carlo Jungle Agent (JungleRandSim).
+- `MCTS=1` -> Monte Carlo Tree Search agent (JungleMCTS).
+- `RAND=1` -> Random agent (JungleRand).
+- `DENRAND=1` -> 50% Den Approaching 50% Random agent (JungleDenRand).
+- `QLEARN=1` -> Q-Learning agent (JungleQLearn).
+
+### Utilities
+
+- `make time` – run the binary with `/usr/bin/time -v`.
+- `make size` – display disk usage of linked libraries and the binary.
+- Add `TRAIN=1` to enable training mode (works only for JungleQLearn).
+
+---
+
 > **Source:**
 > This list of problems was assigned as part of the *Artificial Intelligence* (SI) course in the 2025 Summer semester at the University of Wrocław by Paweł Rychlikowski

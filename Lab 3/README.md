@@ -66,5 +66,13 @@ The solution consists of one file:
 
 ---
 
+## Makefile usage
+
+Run `make X` to build solution for the `X`-th exercise, where `X` is 1 or 2.
+
+Run `make clean` to remove all executables.
+
+---
+
 > **Source:**
 > This list of problems was assigned as part of the *Artificial Intelligence* (SI) course in the 2025 Summer semester at the University of Wrocław by Paweł Rychlikowski
